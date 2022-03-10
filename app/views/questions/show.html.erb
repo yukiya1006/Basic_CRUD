@@ -1,0 +1,52 @@
+<h1>Show</h1>
+<div>
+  Title:<br/>
+  <%= @question.title %>
+</div>
+
+<div>
+  Name:<br/>
+  <%= @question.name %>
+</div>
+
+<div>
+  Content:<br/>
+  <%= @question.content %>
+</div>
+
+<h2>Answers</h2>
+<% @question.answers.each do |answer| %>
+  <div>
+    Name:<br/>
+    <%= answer.name %>
+  </div>
+
+  <div>
+    Content:<br/>
+    <%= answer.content %>
+  </div>
+
+  <div>
+    <%= link_to 'Destroy Answer', [answer.question, answer],
+      data: { method: 'delete', confirm: 'Are you sure?' } %>
+  </div>
+<% end %>
+
+<h2>Add a answer</h2>
+<%= form_with model: [@question, @question.answers.build] do |form| %>
+  <div>
+    <%= form.label :name %><br/>
+    <%= form.text_field :name %>
+  </div>
+
+   <div>
+    <%= form.label :content %><br/>
+    <%= form.text_area :content %>
+  </div>
+   <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'top', questions_path %>
+
